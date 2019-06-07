@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace _184784Pong_Culminating
 {
@@ -19,10 +20,65 @@ namespace _184784Pong_Culminating
     /// </summary>
     public partial class GameBoard : Window
     {
+        public Point Player1Point = new Point();
+        public Point Player2Point = new Point();
+        public enum Direction { UP1, DOWN1, UP2, DOWN2 };
+        Direction direction;
+        public DispatcherTimer timer = new DispatcherTimer();
+
         public GameBoard()
         {
             InitializeComponent();
-            
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
+            timer.Tick += update;
+            timer.Tick += update2;
+            timer.Start();
+        }
+        public void update(object sender, EventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.W))
+            {
+                direction = Direction.UP1;
+            }
+            if (Keyboard.IsKeyDown(Key.S))
+            {
+                direction = Direction.DOWN1;
+            }
+
+            switch (direction)
+            {
+                case Direction.UP1:
+                    Player1Point = new Point(Player1Point.X, Player1Point.Y - 1);
+                    break;
+                case Direction.DOWN1:
+                    Player1Point = new Point(Player1Point.X, Player1Point.Y + 1);
+                    break;
+            }
+            Canvas.SetTop(Player1, Player1Point.Y);
+            Canvas.SetLeft(Player1, Player1Point.X);
+        }
+        public void update2(object sender, EventArgs e)
+        {
+            Player2Point.X = 485;
+            if (Keyboard.IsKeyDown(Key.Down))
+            {
+                direction = Direction.DOWN2;
+            }
+            if (Keyboard.IsKeyDown(Key.Up))
+            {
+                direction = Direction.UP2;
+            }
+            switch (direction)
+            {
+                case Direction.DOWN2:
+                    Player2Point = new Point(Player2Point.X, Player2Point.Y + 1);
+                    break;
+                case Direction.UP2:
+                    Player2Point = new Point(Player2Point.X, Player2Point.Y - 1);
+                    break;
+            }
+            Canvas.SetTop(Player2, Player2Point.Y);
+            Canvas.SetLeft(Player2, Player2Point.X);
         }
     }
 }
