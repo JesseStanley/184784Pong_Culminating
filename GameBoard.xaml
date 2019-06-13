@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_184784Pong_Culminating"
         mc:Ignorable="d"
-        Title="GameBoard" Height="350" Width="525">
+        Title="GameBoard" Height="350" Width="525" ResizeMode="NoResize">
     <Canvas x:Name="canvas">
         <Rectangle x:Name="Player1" Height="80" Width="25" Fill="Blue" Canvas.Top="120" />
         <Rectangle x:Name="Player2" Height="80" Width="25" Fill="Red" Canvas.Top="120" Canvas.Right="0" />
+        <Rectangle x:Name="BALL" Height="15" Width="15" Fill="Black" Canvas.Top="150" Canvas.Left="255" />
     </Canvas>
 </Window>

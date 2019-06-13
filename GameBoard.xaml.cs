@@ -25,6 +25,8 @@ namespace _184784Pong_Culminating
         public enum Direction { UP1, DOWN1, UP2, DOWN2 };
         Direction direction;
         public DispatcherTimer timer = new DispatcherTimer();
+        public static double Xspeed = -1;
+        public static double Yspeed = 1;
 
         public GameBoard()
         {
@@ -54,6 +56,15 @@ namespace _184784Pong_Culminating
                     Player1Point = new Point(Player1Point.X, Player1Point.Y + 1);
                     break;
             }
+            if (Player1Point.Y<=0)
+            {
+                direction = Direction.DOWN1;
+            }
+            if (Player1Point.Y>=240)
+            {
+                direction = Direction.UP1;
+            
+            }
             Canvas.SetTop(Player1, Player1Point.Y);
             Canvas.SetLeft(Player1, Player1Point.X);
         }
@@ -76,6 +87,15 @@ namespace _184784Pong_Culminating
                 case Direction.UP2:
                     Player2Point = new Point(Player2Point.X, Player2Point.Y - 1);
                     break;
+            }
+            if (Player2Point.Y <= 0)
+            {
+                direction = Direction.DOWN2;
+            }
+            if (Player2Point.Y >= 240)
+            {
+                direction = Direction.UP2;
+
             }
             Canvas.SetTop(Player2, Player2Point.Y);
             Canvas.SetLeft(Player2, Player2Point.X);
